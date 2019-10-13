@@ -1,3 +1,6 @@
+# originally copied/based on Friendly Character Generator backend-api's seeds.rb file
+
+
 require 'set'
 
 string = "When you choose this domain at 1st level, you gain proficiency with heavy armor."
