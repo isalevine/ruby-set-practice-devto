@@ -5,16 +5,16 @@
 # for text normalization demo:
 # ============================
 
-string = "When you choose this domain at 1st level, you gain proficiency with heavy armor."
+# string = "When you choose this domain at 1st level, you gain proficiency with heavy armor."
 
-regex1 = /(-)|(--)|(\.\.\.)|(_)/        # separate words joined by hyphens, m-dashes, underscores, and elipses
-regex2 = /([.,:;?!"'`@#$%^&*()+={}-])/  # remove all other punctuation
-string.downcase!
-string.gsub!(regex1, " ")
-string.gsub!(regex2, "")
+# regex1 = /(-)|(--)|(\.\.\.)|(_)/          # separate words joined by hyphens, m-dashes, underscores, and elipses
+# regex2 = /([.,:;?!"'`@#$%^&*()+={}-])/    # remove all other punctuation
+# string.gsub!(regex1, " ")
+# string.gsub!(regex2, "")
+# string.downcase!
 
-puts string
-#=> "when you choose this domain at 1st level you gain proficiency with heavy armor"
+# puts string
+# #=> "when you choose this domain at 1st level you gain proficiency with heavy armor"
 
 
 
