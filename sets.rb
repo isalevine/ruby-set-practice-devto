@@ -25,9 +25,84 @@ string = "when you choose this domain at 1st level you gain proficiency with hea
 array = string.split(" ")
 set = Set.new(array)
 
-set.each do |str|
-    puts str
-end
+# set.each do |str|
+#     puts str
+# end
+
+
+
+name_array = ["big", "sword", "knight"]
+
+# .add
+# ==========
+# set.add("knight")
+
+# name_array.each do |str|
+# 	set.add(str)
+# end
+
+# set.add(name_array)
+
+
+
+# <<
+# ==========
+# name_array.each do |str|
+# 	set << str
+# end
+
+
+
+# .merge
+# ==========
+# set.merge(name_array)
+
+
+
+# .add?
+# ==========
+# set.add?("armor")
+
+# duplicate_counter = 0
+# duplicate_array = ["proficiency", "with", "heavy", "armor"]
+# duplicate_array.each do |str|
+#     if set.add?(str) == nil
+#         duplicate_counter += 1
+#     end
+# end
+# puts duplicate_counter
+
+
+
+
+
+remove_array = ["when", "you", "this", "at", "with"]
+
+# .delete
+# ==========
+# set.delete("when")
+
+# remove_array.each do |str|
+#     set.delete(str)
+# end
+
+# set.delete(remove_array)
+
+
+
+# .subtract
+# ==========
+# set.subtract(remove_array)
+
+
+
+# .delete?
+# ==========
+# set.delete?("shield")
+
+
+
+
 
 
 
@@ -36,9 +111,9 @@ end
 # part 2: object lookup
 # =====================
 
-# filter_words = Set["a", "an", "the", "and", "is", "of", "to", "be", "in", "they", "their", 
-#     "them", "or", "if", "this", "like", "had", "but", "what", "with", "at",
-# ]
+filter_words = Set["a", "an", "the", "and", "is", "of", "to", "be", "in", "they", "their", 
+    "them", "or", "if", "this", "like", "had", "but", "what", "with", "at",
+]
 
 # array = string.split(" ")
 
