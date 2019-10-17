@@ -111,6 +111,13 @@ remove_array = ["when", "you", "this", "at", "with"]
 # part 2: object lookup
 # =====================
 
+# include benchmark comparisons for:
+#   - include? - (beginning, middle, end)
+#   - delete / delete_if (?) - (beginning, middle, end)
+#   - replace - (beginning, middle, end)
+#   - .subset? vs. (a1 & a2) == a2 - per: https://stackoverflow.com/a/10567468
+#   - == (?)
+
 require 'benchmark'
 
 
