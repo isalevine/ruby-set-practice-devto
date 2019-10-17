@@ -201,6 +201,46 @@ Benchmark.bm(34) do |x|
 end
 
 
+# OUTPUT:
+# ================================================================================
+
+# [01:14:46] (master) devto-set-introduction
+# // ♥ ruby sets.rb 
+#                                          user     system      total        real
+# Set   .include? (beginning)       :  0.799191   0.001007   0.800198 (  0.804688)
+# Array .include? (beginning)       :  0.628433   0.000581   0.629014 (  0.630779)
+# Set   .include? (middle)          :  0.814844   0.000616   0.815460 (  0.816231)
+# Array .include? (middle)          :  1.281331   0.000903   1.282234 (  1.284204)
+# Set   .include? (end)             :  0.832735   0.000770   0.833505 (  0.834607)
+# Array .include? (end)             :  2.466209   0.002007   2.468216 (  2.472335)
+
+#                                          user     system      total        real
+# Set   .delete (beginning)         :  0.808267   0.000663   0.808930 (  0.809997)
+# Array .delete (beginning)         :  1.917106   0.001497   1.918603 (  1.921334)
+# Set   .delete (middle)            :  0.879153   0.000658   0.879811 (  0.880859)
+# Array .delete (middle)            :  2.056807   0.001768   2.058575 (  2.062143)
+# Set   .delete (end)               :  0.863566   0.000757   0.864323 (  0.865941)
+# Array .delete (end)               :  2.209409   0.001800   2.211209 (  2.216760)
+
+#                                          user     system      total        real
+# Set   .replace                    :  2.300247   0.001421   2.301668 (  2.306044)
+# Array .replace                    :  0.442213   0.000345   0.442558 (  0.444019)
+
+#                                          user     system      total        real
+# Set   .subset?          (true)    :  1.506719   0.001545   1.508264 (  1.510730)
+# Array .(a1 - a2) == a2  (true)    :  2.626033   0.001873   2.627906 (  2.631523)
+# Set   .subset?          (false)   :  2.158126   0.001394   2.159520 (  2.162242)
+# Array .(a1 - a2) == a2  (false)   :  1.013175   0.000991   1.014166 (  1.016036)
+
+#                                          user     system      total        real
+# Set   ==  (true)                  :  1.106354   0.001037   1.107391 (  1.109885)
+# Array ==  (true)                  :  0.397442   0.000256   0.397698 (  0.397973)
+# Set   ==  (false)                 :  2.975989   0.002164   2.978153 (  2.983041)
+# Array ==  (false)                 :  1.260872   0.000936   1.261808 (  1.265367)
+
+
+
+
 
 # array = string.split(" ")
 
