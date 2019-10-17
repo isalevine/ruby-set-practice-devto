@@ -125,12 +125,12 @@ filter_array = ["a", "an", "the", "and", "is", "of", "to", "be", "in", "they", "
 
 n = 5000000
 Benchmark.bm(7) do |x|
-    x.report("Set .include? (beginning) :")     {n.times do ; filter_words.include?("a") ; end}
-    x.report("Array .include? (beginning) :")   { n.times do; filter_array.include?("a") ; end}
-    x.report("Set .include? (middle) :")     {n.times do ; filter_words.include?("they") ; end}
-    x.report("Array .include? (middle) :")   { n.times do; filter_array.include?("they") ; end}
-    x.report("Set .include? (end) :")     {n.times do ; filter_words.include?("at") ; end}
-    x.report("Array .include? (end) :")   { n.times do; filter_array.include?("at") ; end}
+    x.report("Set .include? (beginning) :")     { n.times do; filter_words.include?("a")   ; end}
+    x.report("Array .include? (beginning) :")   { n.times do; filter_array.include?("a")   ; end}
+    x.report("Set .include? (middle) :")        { n.times do; filter_words.include?("they"); end}
+    x.report("Array .include? (middle) :")      { n.times do; filter_array.include?("they"); end}
+    x.report("Set .include? (end) :")           { n.times do; filter_words.include?("at")  ; end}
+    x.report("Array .include? (end) :")         { n.times do; filter_array.include?("at")  ; end}
 end
 
 
