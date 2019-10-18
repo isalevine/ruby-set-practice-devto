@@ -125,33 +125,40 @@ remove_array = ["when", "you", "this", "at", "with"]
 require 'benchmark'
 
 
-filter_set = Set["a", "an", "the", "and", "is", "of", "to", "be", "in", "they", "their", 
-    "them", "or", "if", "this", "like", "had", "but", "what", "with", "at",
-]
+# filter_set = Set["a", "an", "the", "and", "is", "of", "to", "be", "in", "they", "their", 
+# "them", "or", "if", "this", "like", "had", "but", "what", "with", "at",
+# ]
 
-filter_array = ["a", "an", "the", "and", "is", "of", "to", "be", "in", "they", "their", 
-    "them", "or", "if", "this", "like", "had", "but", "what", "with", "at",
-]
+# filter_array = ["a", "an", "the", "and", "is", "of", "to", "be", "in", "they", "their", 
+#     "them", "or", "if", "this", "like", "had", "but", "what", "with", "at",
+# ]
 
-replace_set = Set["big", "sword", "knight"]
+# replace_set = Set["big", "sword", "knight"]
 
-replace_array = ["big", "sword", "knight"]
+# replace_array = ["big", "sword", "knight"]
 
-sub_set = Set["a", "they", "at"]
+# sub_set = Set["a", "they", "at"]
 
-sub_array = ["a", "they", "at"]
+# sub_array = ["a", "they", "at"]
 
-match_set = Set["a", "an", "the", "and", "is", "of", "to", "be", "in", "they", "their", 
-"them", "or", "if", "this", "like", "had", "but", "what", "with", "at",
-]
+# match_set = Set["a", "an", "the", "and", "is", "of", "to", "be", "in", "they", "their", 
+# "them", "or", "if", "this", "like", "had", "but", "what", "with", "at",
+# ]
 
-match_array = ["a", "an", "the", "and", "is", "of", "to", "be", "in", "they", "their", 
-    "them", "or", "if", "this", "like", "had", "but", "what", "with", "at",
-]
+# match_array = ["a", "an", "the", "and", "is", "of", "to", "be", "in", "they", "their", 
+#     "them", "or", "if", "this", "like", "had", "but", "what", "with", "at",
+# ]
 
 
 n = 5000000
 
+
+filter_set = Set["a", "an", "the", "and", "is", "of", "to", "be", "in", "they", "their", 
+"them", "or", "if", "this", "like", "had", "but", "what", "with", "at",
+]
+filter_array = ["a", "an", "the", "and", "is", "of", "to", "be", "in", "they", "their", 
+    "them", "or", "if", "this", "like", "had", "but", "what", "with", "at",
+]
 Benchmark.bm(34) do |x|
     x.report("Set   .include? (beginning)       :")     { n.times do; filter_set.include?("a")   ; end}
     x.report("Array .include? (beginning)       :")     { n.times do; filter_array.include?("a")   ; end}
@@ -161,27 +168,72 @@ Benchmark.bm(34) do |x|
     x.report("Array .include? (end)             :")     { n.times do; filter_array.include?("at")  ; end}
 end
 
+
 puts
 
+
+filter_set = Set["a", "an", "the", "and", "is", "of", "to", "be", "in", "they", "their", 
+"them", "or", "if", "this", "like", "had", "but", "what", "with", "at",
+]
+filter_array = ["a", "an", "the", "and", "is", "of", "to", "be", "in", "they", "their", 
+    "them", "or", "if", "this", "like", "had", "but", "what", "with", "at",
+]
 Benchmark.bm(34) do |x|
-    x.report("Set   .delete (beginning)         :")     { n.times do; filter_set.delete("a")   ; end}
-    x.report("Array .delete (beginning)         :")     { n.times do; filter_array.delete("a")   ; end}
-    x.report("Set   .delete (middle)            :")     { n.times do; filter_set.delete("they"); end}
-    x.report("Array .delete (middle)            :")     { n.times do; filter_array.delete("they"); end}
-    x.report("Set   .delete (end)               :")     { n.times do; filter_set.delete("at")  ; end}
-    x.report("Array .delete (end)               :")     { n.times do; filter_array.delete("at")  ; end}
+    x.report("Set   .add  (successful)          :")     { n.times do; filter_set.add("big")   ; end}
+    x.report("Array .push (successful)          :")     { n.times do; filter_array.push("big")   ; end}
+    x.report("Set   .add  (failed)              :")     { n.times do; filter_set.add("they"); end}
+    x.report("Array .push (if not present)      :")     { n.times do; filter_array.push("they") if !filter_array.include?("they") ; end}
 end
 
+
 puts
 
+
+filter_set = Set["a", "an", "the", "and", "is", "of", "to", "be", "in", "they", "their", 
+"them", "or", "if", "this", "like", "had", "but", "what", "with", "at",
+]
+filter_array = ["a", "an", "the", "and", "is", "of", "to", "be", "in", "they", "their", 
+    "them", "or", "if", "this", "like", "had", "but", "what", "with", "at",
+]
+Benchmark.bm(34) do |x|
+    x.report("Set   .delete (beginning)         :")     { n.times do; filter_set.delete("a")        ; end}
+    x.report("Array .delete (beginning)         :")     { n.times do; filter_array.delete("a")      ; end}
+    x.report("Set   .delete (middle)            :")     { n.times do; filter_set.delete("they")     ; end}
+    x.report("Array .delete (middle)            :")     { n.times do; filter_array.delete("they")   ; end}
+    x.report("Set   .delete (end)               :")     { n.times do; filter_set.delete("at")       ; end}
+    x.report("Array .delete (end)               :")     { n.times do; filter_array.delete("at")     ; end}
+end
+
+
+puts
+
+
+filter_set = Set["a", "an", "the", "and", "is", "of", "to", "be", "in", "they", "their", 
+"them", "or", "if", "this", "like", "had", "but", "what", "with", "at",
+]
+filter_array = ["a", "an", "the", "and", "is", "of", "to", "be", "in", "they", "their", 
+    "them", "or", "if", "this", "like", "had", "but", "what", "with", "at",
+]
+replace_set = Set["big", "sword", "knight"]
+replace_array = ["big", "sword", "knight"]
 # .replace for Sets is actually SLOWER?!?
 Benchmark.bm(34) do |x|
-    x.report("Set   .replace                    :")     { n.times do; filter_set.replace(replace_set)     ; end}
+    x.report("Set   .replace                    :")     { n.times do; filter_set.replace(replace_set)       ; end}
     x.report("Array .replace                    :")     { n.times do; filter_array.replace(replace_array)   ; end}
 end
 
+
 puts
 
+
+filter_set = Set["a", "an", "the", "and", "is", "of", "to", "be", "in", "they", "their", 
+"them", "or", "if", "this", "like", "had", "but", "what", "with", "at",
+]
+filter_array = ["a", "an", "the", "and", "is", "of", "to", "be", "in", "they", "their", 
+    "them", "or", "if", "this", "like", "had", "but", "what", "with", "at",
+]
+sub_set = Set["a", "they", "at"]
+sub_array = ["a", "they", "at"]
 # .subset is faster for TRUE, but slower for FALSE -- how/why?!?!
 Benchmark.bm(34) do |x|
     x.report("Set   .subset?          (true)    :")     { n.times do; sub_set.subset?(filter_set)                       ; end}
@@ -190,8 +242,21 @@ Benchmark.bm(34) do |x|
     x.report("Array (a1 & a2) == a2   (false)   :")     { n.times do; (filter_array & replace_array) == replace_array   ; end}    
 end
 
+
 puts
 
+filter_set = Set["a", "an", "the", "and", "is", "of", "to", "be", "in", "they", "their", 
+"them", "or", "if", "this", "like", "had", "but", "what", "with", "at",
+]
+filter_array = ["a", "an", "the", "and", "is", "of", "to", "be", "in", "they", "their", 
+    "them", "or", "if", "this", "like", "had", "but", "what", "with", "at",
+]
+match_set = Set["a", "an", "the", "and", "is", "of", "to", "be", "in", "they", "their", 
+"them", "or", "if", "this", "like", "had", "but", "what", "with", "at",
+]
+match_array = ["a", "an", "the", "and", "is", "of", "to", "be", "in", "they", "their", 
+    "them", "or", "if", "this", "like", "had", "but", "what", "with", "at",
+]
 # == for Sets is actually SLOWER?!?
 Benchmark.bm(34) do |x|
     x.report("Set   ==  (true)                  :")     { n.times do; filter_set == match_set       ; end}
