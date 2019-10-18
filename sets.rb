@@ -185,9 +185,9 @@ puts
 # .subset is faster for TRUE, but slower for FALSE -- how/why?!?!
 Benchmark.bm(34) do |x|
     x.report("Set   .subset?          (true)    :")     { n.times do; sub_set.subset?(filter_set)                       ; end}
-    x.report("Array .(a1 - a2) == a2  (true)    :")     { n.times do; (filter_array - sub_array) == sub_array           ; end}
+    x.report("Array (a1 & a2) == a2   (true)    :")     { n.times do; (filter_array & sub_array) == sub_array           ; end}
     x.report("Set   .subset?          (false)   :")     { n.times do; replace_set.subset?(filter_set)                   ; end}
-    x.report("Array .(a1 - a2) == a2  (false)   :")     { n.times do; (filter_array - replace_array) == replace_array   ; end}    
+    x.report("Array (a1 & a2) == a2   (false)   :")     { n.times do; (filter_array & replace_array) == replace_array   ; end}    
 end
 
 puts
