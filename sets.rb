@@ -218,9 +218,6 @@ filter_set = Set["a", "an", "the", "and", "is", "of", "to", "be", "in", "they", 
 filter_array = ["a", "an", "the", "and", "is", "of", "to", "be", "in", "they", "their", 
     "them", "or", "if", "this", "like", "had", "but", "what", "with", "at",
 ]
-
-# NO IDEA why this line is giving a NoMethodError (array is nil?) for array.delete() ...
-    # x.report("Array .delete (beginning)         :")     { n.times do; array = filter_array && array.delete("a")    ; end}
 Benchmark.bm(34) do |x|
     x.report("Set   .delete (beginning)         :") { 
         n.times do 
@@ -329,45 +326,46 @@ end
 # OUTPUT:
 # ================================================================================
 
-# [20:50:29] (master) devto-set-introduction
+# [21:25:07] (master) devto-set-introduction
 # // ♥ ruby sets.rb 
 #                                          user     system      total        real
-# Set   .include? (beginning)       :  0.807254   0.003145   0.810399 (  0.815409)
-# Array .include? (beginning)       :  0.643563   0.002758   0.646321 (  0.649162)
-# Set   .include? (middle)          :  0.839632   0.004164   0.843796 (  0.848407)
-# Array .include? (middle)          :  1.308361   0.006144   1.314505 (  1.321314)
-# Set   .include? (end)             :  0.849066   0.007143   0.856209 (  0.866563)
-# Array .include? (end)             :  2.744591   0.023800   2.768391 (  2.817630)
+# Set   .include? (beginning)       :  0.796039   0.001551   0.797590 (  0.799956)
+# Array .include? (beginning)       :  0.632907   0.000869   0.633776 (  0.637059)
+# Set   .include? (middle)          :  0.786981   0.000610   0.787591 (  0.788172)
+# Array .include? (middle)          :  1.294061   0.001416   1.295477 (  1.298378)
+# Set   .include? (end)             :  0.792309   0.000866   0.793175 (  0.795283)
+# Array .include? (end)             :  2.476954   0.002786   2.479740 (  2.484839)
 
 #                                          user     system      total        real
-# Set   .add  (successful)          :  1.054612   0.008337   1.062949 (  1.076742)
-# Array .push (successful)          :  0.940725   0.103405   1.044130 (  1.048352)
-# Set   .add  (failed)              :  1.024388   0.039030   1.063418 (  1.069405)
-# Array .push (if not present)      :  1.400026   0.010127   1.410153 (  1.431480)
+# Set   .add  (successful)          :  0.929103   0.000749   0.929852 (  0.931718)
+# Array .push (successful)          :  0.909708   0.094546   1.004254 (  1.005897)
+# Set   .add  (failed)              :  0.979433   0.029193   1.008626 (  1.011531)
+# Array .push (if not present)      :  1.327389   0.001286   1.328675 (  1.330673)
 
 #                                          user     system      total        real
-# Set   .delete (beginning)         :  0.907326   0.009437   0.916763 (  0.935422)
-# Array .delete (beginning)         :  2.011303   0.013726   2.025029 (  2.056089)
-# Set   .delete (middle)            :  0.883195   0.006221   0.889416 (  0.904483)
-# Array .delete (middle)            :  2.283526   0.015207   2.298733 (  2.352525)
-# Set   .delete (end)               :  0.853483   0.001496   0.854979 (  0.858217)
-# Array .delete (end)               :  2.344214   0.009447   2.353661 (  2.437685)
+# Set   .delete (beginning)         :  0.812703   0.000889   0.813592 (  0.816582)
+# Array .delete (beginning)         :  1.932468   0.001862   1.934330 (  1.938841)
+# Set   .delete (middle)            :  0.811337   0.000912   0.812249 (  0.814055)
+# Array .delete (middle)            :  2.053270   0.001698   2.054968 (  2.059913)
+# Set   .delete (end)               :  0.813986   0.000986   0.814972 (  0.816330)
+# Array .delete (end)               :  2.203437   0.002076   2.205513 (  2.210077)
 
 #                                          user     system      total        real
-# Set   .subset?          (true)    :  2.188807   0.008591   2.197398 (  2.258545)
-# Array (a1 & a2) == a2   (true)    :  8.366246   0.254859   8.621105 (  8.750982)
-# Set   .subset?          (false)   :  1.620218   0.004993   1.625211 (  1.642964)
-# Array (a1 & a2) == a2   (false)   :  5.618176   0.025675   5.643851 (  5.734110)
+# Set   .subset?          (true)    :  2.076477   0.001450   2.077927 (  2.080519)
+# Array (a1 & a2) == a2   (true)    :  7.961141   0.180642   8.141783 (  8.158982)
+# Set   .subset?          (false)   :  1.554540   0.001360   1.555900 (  1.558715)
+# Array (a1 & a2) == a2   (false)   :  5.280627   0.006986   5.287613 (  5.297066)
 
 #                                          user     system      total        real
-# Set   .replace                    :  2.409822   0.015146   2.424968 (  2.460318)
-# Array .replace                    :  0.450724   0.001970   0.452694 (  0.454624)
+# Set   .replace                    :  2.318287   0.001841   2.320128 (  2.327267)
+# Array .replace                    :  0.441079   0.000528   0.441607 (  0.442994)
 
 #                                          user     system      total        real
-# Set   ==  (true)                  :  7.522211   0.042412   7.564623 (  7.666843)
-# Array ==  (true)                  :  4.191919   0.015160   4.207079 (  4.232901)
-# Set   ==  (false)                 :  1.116277   0.000686   1.116963 (  1.117678)
-# Array ==  (false)                 :  0.387012   0.000397   0.387409 (  0.388069)
+# Set   ==  (true)                  :  7.219614   0.004376   7.223990 (  7.234709)
+# Array ==  (true)                  :  4.119128   0.003112   4.122240 (  4.128884)
+# Set   ==  (false)                 :  1.097661   0.000751   1.098412 (  1.099235)
+# Array ==  (false)                 :  0.391299   0.000482   0.391781 (  0.393029)
+
 
 
 
