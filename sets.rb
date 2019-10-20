@@ -265,12 +265,15 @@ filter_set = Set["a", "an", "the", "and", "is", "of", "to", "be", "in", "they", 
 filter_array = ["a", "an", "the", "and", "is", "of", "to", "be", "in", "they", "their", 
     "them", "or", "if", "this", "like", "had", "but", "what", "with", "at",
 ]
+sub_set = Set["a", "they", "at"]
+sub_array = ["a", "they", "at"]
 replace_set = Set["big", "sword", "knight"]
 replace_array = ["big", "sword", "knight"]
-# .replace for Sets is actually SLOWER?!?
 Benchmark.bm(34) do |x|
-    x.report("Set   .replace                    :")     { n.times do; filter_set.replace(replace_set)       ; end}
-    x.report("Array .replace                    :")     { n.times do; filter_array.replace(replace_array)   ; end}
+    x.report("Set   .subset?          (true)    :")     { n.times do; sub_set.subset?(filter_set)                       ; end}
+    x.report("Array (a1 & a2) == a2   (true)    :")     { n.times do; (filter_array & sub_array) == sub_array           ; end}
+    x.report("Set   .subset?          (false)   :")     { n.times do; replace_set.subset?(filter_set)                   ; end}
+    x.report("Array (a1 & a2) == a2   (false)   :")     { n.times do; (filter_array & replace_array) == replace_array   ; end}    
 end
 
 
@@ -283,18 +286,17 @@ filter_set = Set["a", "an", "the", "and", "is", "of", "to", "be", "in", "they", 
 filter_array = ["a", "an", "the", "and", "is", "of", "to", "be", "in", "they", "their", 
     "them", "or", "if", "this", "like", "had", "but", "what", "with", "at",
 ]
-sub_set = Set["a", "they", "at"]
-sub_array = ["a", "they", "at"]
-# .subset is faster for TRUE, but slower for FALSE -- how/why?!?!
+replace_set = Set["big", "sword", "knight"]
+replace_array = ["big", "sword", "knight"]
+# .replace for Sets is actually SLOWER?!?
 Benchmark.bm(34) do |x|
-    x.report("Set   .subset?          (true)    :")     { n.times do; sub_set.subset?(filter_set)                       ; end}
-    x.report("Array (a1 & a2) == a2   (true)    :")     { n.times do; (filter_array & sub_array) == sub_array           ; end}
-    x.report("Set   .subset?          (false)   :")     { n.times do; replace_set.subset?(filter_set)                   ; end}
-    x.report("Array (a1 & a2) == a2   (false)   :")     { n.times do; (filter_array & replace_array) == replace_array   ; end}    
+    x.report("Set   .replace                    :")     { n.times do; filter_set.replace(replace_set)       ; end}
+    x.report("Array .replace                    :")     { n.times do; filter_array.replace(replace_array)   ; end}
 end
 
 
 puts
+
 
 filter_set = Set["a", "an", "the", "and", "is", "of", "to", "be", "in", "they", "their", 
 "them", "or", "if", "this", "like", "had", "but", "what", "with", "at",
