@@ -150,8 +150,8 @@ require 'benchmark'
 # ]
 
 
-# n = 5000000
-n = 1000000
+n = 5000000
+# n = 1000000
 
 
 filter_set = Set["a", "an", "the", "and", "is", "of", "to", "be", "in", "they", "their", 
@@ -180,18 +180,30 @@ filter_array = ["a", "an", "the", "and", "is", "of", "to", "be", "in", "they", "
     "them", "or", "if", "this", "like", "had", "but", "what", "with", "at",
 ]
 Benchmark.bm(34) do |x|
-    x.report("Set   .add  (successful)          :")     { n.times do; set = filter_set && set.add("big")                                            ; end}
-    x.report("Array .push (successful)          :")     { n.times do
-        array = filter_array
-        array.push("big")                                     
-    end}
-    x.report("Set   .add  (failed)              :")     { n.times do; set = filter_set && set.add("they")                                           ; end}
-    x.report("Array .push (if not present)      :")     { n.times do
-        array = filter_array
-        if !filter_array.include?("they")
-            array.push("they")
-        end   
-    end}
+    x.report("Set   .add  (successful)          :") { 
+        n.times do
+            set = filter_set && set.add("big")
+        end
+    }
+    x.report("Array .push (successful)          :") { 
+        n.times do
+            array = filter_array
+            array.push("big")                                     
+        end
+    }
+    x.report("Set   .add  (failed)              :") { 
+        n.times do
+            set = filter_set && set.add("they")
+        end
+    }
+    x.report("Array .push (if not present)      :") { 
+        n.times do
+            array = filter_array
+            if !filter_array.include?("they")
+                array.push("they")
+            end   
+        end
+    }
 end
 
 
@@ -208,21 +220,39 @@ filter_array = ["a", "an", "the", "and", "is", "of", "to", "be", "in", "they", "
 # NO IDEA why this line is giving a NoMethodError (array is nil?) for array.delete() ...
     # x.report("Array .delete (beginning)         :")     { n.times do; array = filter_array && array.delete("a")    ; end}
 Benchmark.bm(34) do |x|
-    x.report("Set   .delete (beginning)         :")     { n.times do; set = filter_set && set.delete("a")           ; end}
-    x.report("Array .delete (beginning)         :")     { n.times do
-        array = filter_array
-        array.delete("a")
-    end}
-    x.report("Set   .delete (middle)            :")     { n.times do; set = filter_set && set.delete("they")        ; end}
-    x.report("Array .delete (middle)            :")     { n.times do
-        array = filter_array
-        array.delete("they")  
-    end}
-    x.report("Set   .delete (end)               :")     { n.times do; set = filter_set && set.delete("at")          ; end}
-    x.report("Array .delete (end)               :")     { n.times do
-        array = filter_array
-        array.delete("at")    
-    end}
+    x.report("Set   .delete (beginning)         :") { 
+        n.times do 
+            set = filter_set && set.delete("a")           
+        end
+    }
+    x.report("Array .delete (beginning)         :") { 
+        n.times do
+            array = filter_array
+            array.delete("a")
+        end
+    }
+    x.report("Set   .delete (middle)            :") { 
+        n.times do 
+            set = filter_set && set.delete("they")        
+        end
+    }
+    x.report("Array .delete (middle)            :") { 
+        n.times do
+            array = filter_array
+            array.delete("they")  
+        end
+    }
+    x.report("Set   .delete (end)               :") { 
+        n.times do 
+            set = filter_set && set.delete("at")          
+        end
+    }
+    x.report("Array .delete (end)               :") { 
+        n.times do
+            array = filter_array
+            array.delete("at")    
+        end
+    }
 end
 
 
