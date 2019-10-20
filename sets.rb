@@ -182,7 +182,8 @@ filter_array = ["a", "an", "the", "and", "is", "of", "to", "be", "in", "they", "
 Benchmark.bm(34) do |x|
     x.report("Set   .add  (successful)          :") { 
         n.times do
-            set = filter_set && set.add("big")
+            set = filter_set
+            set.add("big")
         end
     }
     x.report("Array .push (successful)          :") { 
@@ -193,13 +194,14 @@ Benchmark.bm(34) do |x|
     }
     x.report("Set   .add  (failed)              :") { 
         n.times do
-            set = filter_set && set.add("they")
+            set = filter_set
+            set.add("they")
         end
     }
     x.report("Array .push (if not present)      :") { 
         n.times do
             array = filter_array
-            if !filter_array.include?("they")
+            if !array.include?("they")
                 array.push("they")
             end   
         end
@@ -222,7 +224,8 @@ filter_array = ["a", "an", "the", "and", "is", "of", "to", "be", "in", "they", "
 Benchmark.bm(34) do |x|
     x.report("Set   .delete (beginning)         :") { 
         n.times do 
-            set = filter_set && set.delete("a")           
+            set = filter_set
+            set.delete("a")           
         end
     }
     x.report("Array .delete (beginning)         :") { 
@@ -233,7 +236,8 @@ Benchmark.bm(34) do |x|
     }
     x.report("Set   .delete (middle)            :") { 
         n.times do 
-            set = filter_set && set.delete("they")        
+            set = filter_set
+            set.delete("they")        
         end
     }
     x.report("Array .delete (middle)            :") { 
@@ -244,7 +248,8 @@ Benchmark.bm(34) do |x|
     }
     x.report("Set   .delete (end)               :") { 
         n.times do 
-            set = filter_set && set.delete("at")          
+            set = filter_set
+            set.delete("at")          
         end
     }
     x.report("Array .delete (end)               :") { 
