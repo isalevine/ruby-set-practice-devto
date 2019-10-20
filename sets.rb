@@ -308,6 +308,8 @@ match_set = Set["a", "an", "the", "and", "is", "of", "to", "be", "in", "they", "
 match_array = ["a", "an", "the", "and", "is", "of", "to", "be", "in", "they", "their", 
     "them", "or", "if", "this", "like", "had", "but", "what", "with", "at",
 ]
+replace_set = Set["big", "sword", "knight"]
+replace_array = ["big", "sword", "knight"]
 # == for Sets is actually SLOWER?!?
 Benchmark.bm(34) do |x|
     x.report("Set   ==  (true)                  :")     { n.times do; filter_set == match_set       ; end}
@@ -320,39 +322,45 @@ end
 # OUTPUT:
 # ================================================================================
 
-# [01:14:46] (master) devto-set-introduction
+# [20:38:19] (master) devto-set-introduction
 # // ♥ ruby sets.rb 
 #                                          user     system      total        real
-# Set   .include? (beginning)       :  0.799191   0.001007   0.800198 (  0.804688)
-# Array .include? (beginning)       :  0.628433   0.000581   0.629014 (  0.630779)
-# Set   .include? (middle)          :  0.814844   0.000616   0.815460 (  0.816231)
-# Array .include? (middle)          :  1.281331   0.000903   1.282234 (  1.284204)
-# Set   .include? (end)             :  0.832735   0.000770   0.833505 (  0.834607)
-# Array .include? (end)             :  2.466209   0.002007   2.468216 (  2.472335)
+# Set   .include? (beginning)       :  0.799968   0.000781   0.800749 (  0.801720)
+# Array .include? (beginning)       :  0.624981   0.000473   0.625454 (  0.625898)
+# Set   .include? (middle)          :  0.842336   0.002082   0.844418 (  0.846732)
+# Array .include? (middle)          :  1.377181   0.010076   1.387257 (  1.401818)
+# Set   .include? (end)             :  0.830377   0.002882   0.833259 (  0.836258)
+# Array .include? (end)             :  2.690000   0.019396   2.709396 (  2.752856)
 
 #                                          user     system      total        real
-# Set   .delete (beginning)         :  0.808267   0.000663   0.808930 (  0.809997)
-# Array .delete (beginning)         :  1.917106   0.001497   1.918603 (  1.921334)
-# Set   .delete (middle)            :  0.879153   0.000658   0.879811 (  0.880859)
-# Array .delete (middle)            :  2.056807   0.001768   2.058575 (  2.062143)
-# Set   .delete (end)               :  0.863566   0.000757   0.864323 (  0.865941)
-# Array .delete (end)               :  2.209409   0.001800   2.211209 (  2.216760)
+# Set   .add  (successful)          :  1.071473   0.007905   1.079378 (  1.095753)
+# Array .push (successful)          :  0.971526   0.113874   1.085400 (  1.095646)
+# Set   .add  (failed)              :  1.016600   0.030278   1.046878 (  1.048309)
+# Array .push (if not present)      :  1.319782   0.001061   1.320843 (  1.321994)
 
 #                                          user     system      total        real
-# Set   .replace                    :  2.300247   0.001421   2.301668 (  2.306044)
-# Array .replace                    :  0.442213   0.000345   0.442558 (  0.444019)
+# Set   .delete (beginning)         :  0.847254   0.000844   0.848098 (  0.848870)
+# Array .delete (beginning)         :  1.924823   0.004572   1.929395 (  1.934509)
+# Set   .delete (middle)            :  0.847730   0.000768   0.848498 (  0.849024)
+# Array .delete (middle)            :  2.106035   0.006836   2.112871 (  2.123520)
+# Set   .delete (end)               :  0.917233   0.005234   0.922467 (  0.931679)
+# Array .delete (end)               :  2.201310   0.001398   2.202708 (  2.204095)
 
 #                                          user     system      total        real
-# Set   .subset?          (true)    :  1.506719   0.001545   1.508264 (  1.510730)
-# Array .(a1 - a2) == a2  (true)    :  2.626033   0.001873   2.627906 (  2.631523)
-# Set   .subset?          (false)   :  2.158126   0.001394   2.159520 (  2.162242)
-# Array .(a1 - a2) == a2  (false)   :  1.013175   0.000991   1.014166 (  1.016036)
+# Set   .replace                    :  2.274481   0.001641   2.276122 (  2.277941)
+# Array .replace                    :  0.436824   0.000219   0.437043 (  0.437270)
 
 #                                          user     system      total        real
-# Set   ==  (true)                  :  1.106354   0.001037   1.107391 (  1.109885)
-# Array ==  (true)                  :  0.397442   0.000256   0.397698 (  0.397973)
-# Set   ==  (false)                 :  2.975989   0.002164   2.978153 (  2.983041)
-# Array ==  (false)                 :  1.260872   0.000936   1.261808 (  1.265367)
+# Set   .subset?          (true)    :  2.095046   0.001112   2.096158 (  2.097698)
+# Array (a1 & a2) == a2   (true)    :  7.874566   0.187823   8.062389 (  8.068185)
+# Set   .subset?          (false)   :  1.564256   0.000845   1.565101 (  1.566413)
+# Array (a1 & a2) == a2   (false)   :  5.269222   0.012256   5.281478 (  5.289586)
+
+#                                          user     system      total        real
+# Set   ==  (true)                  :  7.229199   0.006450   7.235649 (  7.242571)
+# Array ==  (true)                  :  4.103569   0.002604   4.106173 (  4.109292)
+# Set   ==  (false)                 :  1.097917   0.000701   1.098618 (  1.099354)
+# Array ==  (false)                 :  0.386803   0.000315   0.387118 (  0.387464)
 
 
 
