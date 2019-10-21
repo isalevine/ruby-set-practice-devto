@@ -154,6 +154,11 @@ n = 5000000
 # n = 1000000
 
 
+
+# FASTER OPERATIONS: .include?, .add, .delete, .subset?
+# =======================================================
+
+
 filter_set = Set["a", "an", "the", "and", "is", "of", "to", "be", "in", "they", "their", 
 "them", "or", "if", "this", "like", "had", "but", "what", "with", "at",
 ]
@@ -282,6 +287,12 @@ end
 puts
 
 
+
+
+# SLOWER OPERATIONS: .replace and ==
+# ====================================
+
+
 filter_set = Set["a", "an", "the", "and", "is", "of", "to", "be", "in", "they", "their", 
 "them", "or", "if", "this", "like", "had", "but", "what", "with", "at",
 ]
@@ -290,7 +301,6 @@ filter_array = ["a", "an", "the", "and", "is", "of", "to", "be", "in", "they", "
 ]
 replace_set = Set["big", "sword", "knight"]
 replace_array = ["big", "sword", "knight"]
-# .replace for Sets is actually SLOWER?!?
 Benchmark.bm(34) do |x|
     x.report("Set   .replace                    :")     { n.times do; filter_set.replace(replace_set)       ; end}
     x.report("Array .replace                    :")     { n.times do; filter_array.replace(replace_array)   ; end}
@@ -314,7 +324,6 @@ match_array = ["a", "an", "the", "and", "is", "of", "to", "be", "in", "they", "t
 ]
 replace_set = Set["big", "sword", "knight"]
 replace_array = ["big", "sword", "knight"]
-# == for Sets is actually SLOWER?!?
 Benchmark.bm(34) do |x|
     x.report("Set   ==  (true)                  :")     { n.times do; filter_set == match_set       ; end}
     x.report("Array ==  (true)                  :")     { n.times do; filter_array == match_array   ; end}
