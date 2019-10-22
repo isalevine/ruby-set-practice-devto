@@ -150,8 +150,8 @@ require 'benchmark'
 # ]
 
 
-n = 5000000
 # n = 1000000
+n = 5000000
 
 
 
@@ -374,22 +374,3 @@ end
 # Array ==  (true)                  :  4.119128   0.003112   4.122240 (  4.128884)
 # Set   ==  (false)                 :  1.097661   0.000751   1.098412 (  1.099235)
 # Array ==  (false)                 :  0.391299   0.000482   0.391781 (  0.393029)
-
-
-
-
-
-
-
-# array = string.split(" ")
-
-# set = Set.new
-# array.each do |str|
-#     if !filter_set.include?(str)
-#         set.add(str)
-#     end
-# end
-
-# puts set
-
-
