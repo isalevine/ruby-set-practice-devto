@@ -32,10 +32,15 @@ int_sorted_set = SortedSet.new(int_vector)
 
 
 
-
-
-
-
 puts str_sorted_set
 puts int_sorted_set
 # puts mixed_sorted_set
+
+
+
+# [] and .at methods below are NOT WORKING (NoMethodError)--is this an issue w/ Ruby??
+puts str_sorted_set[0]      # => "am"
+puts int_sorted_set[0]      # => 0
+
+puts str_sorted_set.at(-1)  # => "watching"
+puts int_sorted_set.at(-1)  # => 7
